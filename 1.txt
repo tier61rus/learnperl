@@ -1,3 +1,2 @@
 first line of txt
-second
-third
+this is file changing in parralel branch
