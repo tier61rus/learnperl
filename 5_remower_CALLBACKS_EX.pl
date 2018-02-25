@@ -13,7 +13,7 @@ if (!$command) {
     die "no command in input\n";
 } elsif (not exists $functions->{$command}) {
     #print "--$functions->{$command}--\n";
-    print Dumper $functions;
+    print "all_supportable functions :".(Dumper $functions);
     die "UNSUPPORTABLE COMMAND \n";
 }
 
@@ -21,8 +21,9 @@ my @files = @ARGV or die "NOT ENOUGHT INPUT ARGS!\nUsage: $0 --command file_name
 
 ARRAY_ITER: {
     foreach my $file_name (@files) {
+        print (("="x50)."\n");
         foreach my $folder (@folders){
-            print "=======================================\n";
+            print (("-"x30)."\n");
             my $file_full = $folder_path.'/'.$folder.'/'.$file_name;
             print "we make ".uc($command)." of file_full = $file_full\n";
             print $functions->{$command}->($file_full);#making calback
@@ -35,6 +36,7 @@ BEGIN {
             my $file = shift;
             if (-f $file){
                 print "We are deleting $file\n";
+                unlink $file;
             } else {
                 return "Error: File $file you want to delete doesn't exist\n";
             }
